@@ -24,10 +24,14 @@ const AddTaskForm = () => {
             type="date"
             name="day"
             id="day"
-            placeholder="Day & Time"
             value={day}
             onChange={(e) => setDay(e.target.value)}
           />
+        </div>
+        <div>
+          <button className="btn btn-submit" type="submit">
+            Submit
+          </button>
         </div>
       </form>
     </div>
