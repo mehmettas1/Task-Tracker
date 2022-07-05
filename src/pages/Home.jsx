@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../components/Header';
 import ShowTasks from '../components/ShowTasks';
 import { useState, useEffect } from 'react';
-// import data from '../helper/starterData';
+import data from '../helper/starterData';
 
 const Home = () => {
   const [tasks, setTasks] = useState(
