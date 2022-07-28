@@ -1,24 +1,28 @@
-import React from 'react';
-import Header from '../components/Header';
-import ShowTasks from '../components/ShowTasks';
-import { useState, useEffect } from 'react';
-import data from '../helper/starterData';
+import { useState,useEffect } from "react";
+import Header from "../components/Header";
+import ShowTasks from "../components/ShowTasks";
+// import data from "../helper/starterData"
 
 const Home = () => {
   const [tasks, setTasks] = useState(
-    JSON.parse(localStorage.getItem('tasks')) || []
+    JSON.parse(localStorage.getItem("tasks"))|| []
   );
+ 
 
-  useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-  }, [tasks]);
+useEffect(() => {
+localStorage.setItem("tasks",JSON.stringify(tasks));
+}, [tasks]);
 
-  console.log(tasks);
+
+
+//  console.log(tasks);
   return (
-    <div>
+    <main>
+    <div className="headerShow">
       <Header tasks={tasks} setTasks={setTasks} />
-      <ShowTasks />
+      <ShowTasks tasks={tasks} setTasks={setTasks} />
     </div>
+    </main>
   );
 };
 
