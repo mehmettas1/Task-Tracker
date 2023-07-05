@@ -1,56 +1,51 @@
-import { useState } from "react";
-
-
+import { useState } from 'react';
 
 const AddTaskForm = ({ tasks, setTasks }) => {
-  const [task, setTask] = useState("");
-  const [date, setDate] = useState("");
+  const [task, setTask] = useState('');
+  const [day, setDay] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const id =new Date().getTime();
-    const newTask={id:id,task:task,date:date,isDone:false}
-    setTasks([...tasks,newTask])
-    setTask("");
-    setDate("");
+    const id = new Date().getTime();
+    const newTask = { id: id, task: task, day: day, isDone: false };
+    setTasks([...tasks, newTask]);
+    setTask('');
+    setDay('');
   };
 
   return (
-    <form onSubmit={handleSubmit} >
-      <fieldset>
-        <div className="mb-3">
-          <label htmlFor="disabledTextInput" className="form-label">
-            Add Task
-          </label>
+    <div>
+      <form onSubmit={handleSubmit}>
+        <div className="form-control">
+          <label htmlFor="task">Task</label>
           <input
             type="text"
+            name="task"
             id="task"
-            className="form-control"
-            placeholder="Add your task"
+            placeholder="add task"
             value={task}
             onChange={(e) => setTask(e.target.value)}
             required
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="disabledTextInput" className="form-label">
-            Add date
-          </label>
+        <div className="form-control">
+          <label htmlFor="day">Day & Time</label>
           <input
             type="date"
-            id="date"
-            className="form-control"
-            placeholder="Add your date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
+            name="day"
+            id="day"
+            value={day}
+            onChange={(e) => setDay(e.target.value)}
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </fieldset>
-    </form>
+        <div>
+          <button className="btn btn-submit" type="submit">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 
