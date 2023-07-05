@@ -1,53 +1,39 @@
-import { MdClear } from "react-icons/md";
-import { FcCheckmark } from "react-icons/fc";
-// import { useState } from "react";
+import { FaTimesCircle } from 'react-icons/fa';
 
 const ShowTasks = ({ tasks, setTasks }) => {
-// const [info, setİnfo] = useState({isDone:true})
+  console.log(tasks);
+  const toggleDone = (id) => {
+    setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, isDone: !task.isDone } : task
+      )
+    );
+  };
 
-const line=(id)=>{
-  setTasks(tasks.map((tsk)=>{
-    if(tsk.id===id){
-      return{...tsk,isDone:!tsk.isDone}
-    }else{
-      return tsk
-    }
-  }))
-  // const newline={isDone:false}
-  // setİnfo(...info,newline)
-}
-  
+  const deleteTask = (id) => {
+    setTasks(tasks.filter((task) => task.id !== id));
+  };
   return (
-    <div  >
-      {tasks.map((item) => {
+    <div>
+      {tasks.map((task) => {
+        const { id, task: text, day, isDone } = task;
         return (
-          <ul key={item.id}>
-            <li className={item.isDone ? "inva text-decoration-line-through" : "inva" }>
-              <FcCheckmark
-              onClick={()=>line(item.id)}
-              // onClick={()=>{setTasks(
-              //   tasks
-              //     .filter((task) => task.id === item.id)
-                // .map((tsk) =>
-                //   tsk.id === item.id ? { ...item, isDone: !item.isDone } : item)
-            //   );
-            // }}
+          <div
+            key={id}
+            className={`task ${isDone ? 'done' : ''}`}
+            onDoubleClick={() => toggleDone(id)}
+          >
+            <h3>
+              {text}
+              <FaTimesCircle
+                style={{ color: 'red' }}
+                onClick={() => deleteTask(id)}
               />
-               {/* {console.log(item.isDone)} */}
-              {item.task} <br /> 
-              <MdClear
-                onClick={() => {
-                  setTasks(tasks.filter((task) => task.id !== item.id));
-                }}
-                className="mdclear"
-              />{item.date}
-            </li>
-
-          </ul>
-         
+            </h3>
+            <h6>{day}</h6>
+          </div>
         );
       })}
-       <p>{console.log(tasks)}</p> 
     </div>
   );
 };
